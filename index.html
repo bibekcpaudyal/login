@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Responsive Login App</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="background-hearts" aria-hidden="true">
+    <span class="heart heart-1">❤️</span>
+    <span class="heart heart-2">💙</span>
+    <span class="heart heart-3">💚</span>
+    <span class="heart heart-4">💛</span>
+    <span class="heart heart-5">💜</span>
+    <span class="heart heart-6">🧡</span>
+  </div>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand"><a href="index.html">MyPortal</a></div>
+    </header>
+
+    <main>
+      <section class="hero-panel active" id="heroPanel">
+        <div class="hero-copy">
+          <span class="eyebrow">Welcome back</span>
+          <h1>Clean responsive login experience</h1>
+          <p>Login, create account, or recover your password with animated transitions and secure database integration.</p>
+          <div class="hero-actions">
+            <button id="startRegister" class="primary">Get started</button>
+            <button id="startLogin" class="secondary">Login</button>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="device-card">
+            <div class="device-screen">
+              <div class="screen-header"></div>
+              <div class="screen-content"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="auth-panel" id="authPanel">
+        <div class="auth-card">
+          <div class="auth-head">
+            <h2>Login to your account</h2>
+            <p>Enter your credentials to continue.</p>
+          </div>
+          <form id="loginForm" class="auth-form">
+            <label>
+              Email
+              <input type="email" id="loginEmail" autocomplete="email" required />
+            </label>
+            <label>
+              Password
+              <input type="password" id="loginPassword" autocomplete="current-password" required minlength="6" />
+            </label>
+            <div class="form-row space-between">
+              <button type="submit" class="primary">Login</button>
+              <button type="button" id="forgotPasswordBtn" class="link-button">Forgot password?</button>
+            </div>
+            <p class="auth-footer">No account? <button id="openRegisterBtn" type="button" class="link-button">Create new user</button></p>
+            <div id="loginMessage" class="form-message"></div>
+          </form>
+        </div>
+      </section>
+
+      <section class="dashboard-panel" id="dashboardPanel">
+        <div class="dashboard-card">
+          <div class="dashboard-head">
+            <h2>Welcome, <span id="dashboardName">User</span>!</h2>
+            <p>Your performance dashboard shows results across different fields and metrics.</p>
+          </div>
+          <div class="dashboard-actions">
+            <button id="logoutBtn" class="primary">Sign out</button>
+          </div>
+
+          <div class="dashboard-overview">
+            <div class="stats-grid">
+              <article class="stat-card">
+                <span class="stat-value">1.2k</span>
+                <p>New signups</p>
+              </article>
+              <article class="stat-card">
+                <span class="stat-value">89%</span>
+                <p>Activation rate</p>
+              </article>
+              <article class="stat-card">
+                <span class="stat-value">4.8</span>
+                <p>Average user score</p>
+              </article>
+              <article class="stat-card">
+                <span class="stat-value">73%</span>
+                <p>Field completion</p>
+              </article>
+            </div>
+
+            <div class="charts-grid">
+              <article class="chart-card">
+                <div class="chart-card-header">
+                  <h3>Weekly Signups</h3>
+                  <span class="badge accent">Growth</span>
+                </div>
+                <canvas id="signupChart" width="500" height="240"></canvas>
+              </article>
+
+              <article class="chart-card">
+                <div class="chart-card-header">
+                  <h3>Activity Trend</h3>
+                  <span class="badge">Engagement</span>
+                </div>
+                <canvas id="activityChart" width="500" height="240"></canvas>
+              </article>
+
+              <article class="chart-card field-chart">
+                <div class="chart-card-header">
+                  <h3>Field results</h3>
+                  <span class="badge secondary">Live</span>
+                </div>
+                <div class="field-bars">
+                  <div class="field-row">
+                    <span>Marketing</span>
+                    <div class="field-bar"><div class="fill fill-marketing" style="width: 82%"></div></div>
+                    <strong>82%</strong>
+                  </div>
+                  <div class="field-row">
+                    <span>Sales</span>
+                    <div class="field-bar"><div class="fill fill-sales" style="width: 67%"></div></div>
+                    <strong>67%</strong>
+                  </div>
+                  <div class="field-row">
+                    <span>Design</span>
+                    <div class="field-bar"><div class="fill fill-design" style="width: 91%"></div></div>
+                    <strong>91%</strong>
+                  </div>
+                  <div class="field-row">
+                    <span>Support</span>
+                    <div class="field-bar"><div class="fill fill-support" style="width: 74%"></div></div>
+                    <strong>74%</strong>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="overlay" class="overlay hidden"></div>
+
+  <div class="modal" id="registerModal" aria-hidden="true">
+    <div class="modal-card">
+      <button class="close-button" id="closeRegister">×</button>
+      <h3>Create a new account</h3>
+      <p>Register now and access the secure dashboard.</p>
+      <form id="registerForm" class="modal-form">
+        <label>
+          Full name
+          <input type="text" id="registerName" required />
+        </label>
+        <label>
+          Email address
+          <input type="email" id="registerEmail" required />
+        </label>
+        <label>
+          Password
+          <input type="password" id="registerPassword" minlength="6" required />
+        </label>
+        <button type="submit" class="primary">Create account</button>
+        <div id="registerMessage" class="form-message"></div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal" id="forgotModal" aria-hidden="true">
+    <div class="modal-card">
+      <button class="close-button" id="closeForgot">×</button>
+      <h3>Recover your password</h3>
+      <p>Enter your email and we will send recovery instructions.</p>
+      <form id="forgotForm" class="modal-form">
+        <label>
+          Email address
+          <input type="email" id="forgotEmail" required />
+        </label>
+        <button type="submit" class="primary">Send recovery email</button>
+        <div id="forgotMessage" class="form-message"></div>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
